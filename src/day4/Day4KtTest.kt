@@ -18,7 +18,14 @@ fun testHasDouble() {
     assert(hasDouble("123456") == false)
 }
 
+fun testHasDoublePart2() {
+    assert(hasDoublePart2("112233"))
+    assert(hasDoublePart2("123444") == false)
+    assert(hasDouble("111122"))
+}
+
 fun main() {
     testIncreasing()
     testHasDouble()
+    testHasDoublePart2()
 }
