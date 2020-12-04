@@ -1,16 +1,16 @@
 <?php
 
 class Day2 {
+    public function findValidPasswords(array $pws) {
+        return count(array_filter($pws, array($this, 'isValidPassword')));
+    }
+
     private function isValidPassword(string $pws) {
         $row = explode(" ", $pws);
         $letter = trim($row[1], ':');
         $range = array_map('intval', explode("-", $row[0]));
         return $this->hasLetterAtPosition($letter, $range, $row[2]);
 //      return $this->fallsInRange($letter, $range, $row[2]);
-    }
-
-    public function findValidPasswords(array $pws) {
-        return count(array_filter($pws, array($this, 'isValidPassword')));
     }
 
 
