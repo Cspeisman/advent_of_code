@@ -6,22 +6,28 @@ use PHPUnit\Framework\TestCase;
 class Day4Test extends TestCase {
     public function testGetValidPassports() {
         $inputs = [
-            "ecl:gry pid:860033327 eyr:2020 hcl:#fffffd",
-            "byr:1937 iyr:2017 cid:147 hgt:183cm",
+            "pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980",
+            "hcl:#623a2f",
             "",
-            "iyr:2013 ecl:amb cid:350 eyr:2023 pid:028048884",
-            "hcl:#cfa07d byr:1929",
-            "",
-            "hcl:#ae17e1 iyr:2013",
-            "eyr:2024",
-            "ecl:brn pid:760753108 byr:1931",
-            "hgt:179cm",
-            "",
-            "hcl:#cfa07d eyr:2025 pid:166559648",
-            "iyr:2011 ecl:brn hgt:59in"
+            "eyr:2029 ecl:blu cid:129 byr:1989",
+            "iyr:2014 pid:896056539 hcl:#a97842 hgt:165cm",
         ];
         $day4 = Day4::parseInput($inputs);
         self::assertEquals(2, $day4->getValidPassorts());
+    }
+
+    public function testHeighValidator() {
+        self::assertTrue((new Validator())->heightValidator("179cm"));
+        self::assertTrue((new Validator())->heightValidator("59in"));
+        self::assertFalse((new Validator())->heightValidator("59"));
+        self::assertFalse((new Validator())->hairValidator("123abc"));
+        self::assertTrue((new Validator())->hairValidator("#123abc"));
+        self::assertFalse((new Validator())->hairValidator("#123abz"));
+        self::assertFalse((new Validator())->eyeValidator("boo"));
+        self::assertTrue((new Validator())->eyeValidator("amb"));
+        self::assertTrue((new Validator())->passportValidator("000000001"));
+        self::assertTrue((new Validator())->passportValidator("087499704"));
+        self::assertFalse((new Validator())->passportValidator("0123456789"));
     }
 
 }
