@@ -49,5 +49,11 @@ class Day5 {
 
 $day5 = new Day5();
 $input = array_map('trim', file(__DIR__ . '/input.txt'));
-$seat_id = array_map(array($day5, 'getSeatId'), $input);
-print max($seat_id);
+$seat_ids = array_map(array($day5, 'getSeatId'), $input);
+sort($seat_ids);
+
+foreach ($seat_ids as $index => $seat_id) {
+    if (isset($seat_ids[$index + 1]) && $seat_ids[$index + 1] - $seat_id === 2) {
+        print $seat_id + 1;
+    }
+}
